@@ -1,0 +1,11 @@
+<div>
+  <div id="mySidenav" class="sidenav">
+      <ul class="list-group">
+          <li v-for="n in news" class="list-group-item">
+              <span v-html="n.header"><b>{{ n.header }}</b></span><br>
+              <span v-html="n.text">{{ n.text }}</span><br>
+              <span v-if="n.url != 0"><img :src="n.url" style="width:50%;height:50%;"></span>
+          </li>
+      </ul>
+  </div>
+</div>

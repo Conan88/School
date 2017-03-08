@@ -1,0 +1,27 @@
+<div>
+    <h1>{{ headBBC }}</h1>
+      <ul class="list-group">
+          <li v-for="t in articles" class="list-group-item">
+              <a v-bind:href="t.url">
+                <img :src="t.urlToImage" style="width:50%;height:50%;">
+              </a>
+              <span> {{ t.urltoimage }} </span><br>
+              <span><b>{{ t.title }}</b></span><br>
+              <span>{{ t.description }}</span><br>
+              <a v-bind:href="t.url">{{ t.url }}</a><br>
+          </li>
+      </ul>
+
+       <h1>{{ headCNN }}</h1>
+      <ul class="list-group">
+          <li v-for="t in articlesCNN" class="list-group-item">
+              <a v-bind:href="t.url">
+                <img :src="t.urlToImage" style="width:50%;height:50%;"><br>
+              </a>
+              <span><b>{{ t.title }}</b></span><br>
+              <span>{{ t.description }}</span><br>
+              <a v-bind:href="t.url">{{ t.url }}</a><br>
+              <span> {{ t.author }} </span>
+          </li>
+      </ul>
+</div>

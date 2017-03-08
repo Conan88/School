@@ -1,0 +1,21 @@
+@model NewSticker.Data.News
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-9">
+            <form method="POST">
+                <input type="text" v-model="inputHeader" class="form-control" id="title" placeholder="Title">
+                <input type="text" v-model="inputText" class="form-control" id="description" placeholder="Summary" >
+                <input type="text" v-model="inputUrl" class="form-control" id="description" placeholder="Image url" >
+                <div class="btn btn-primary" v-on:click="addNews" id="btnPost">Post it</div>
+            </form>
+        </div>
+    </div>
+</div>
+ 
+

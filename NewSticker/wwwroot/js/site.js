@@ -56,10 +56,35 @@ new Vue({
                 });
             });
         },
+        updateNews: function(n) {
+            console.log("Update news");
+            var changedData = {
+                header: this.inputHeader,
+                id: n.id,
+                text: this.inputText,
+                url: this.inputUrl
+            }
+            console.log("ID is: " + n.id);
+            this.$http.put('/api/sticker/' + n.id, changedData).then(function() {
+
+            });
+        },
+        deleteNews: function(n) {
+
+            var answer = confirm("Delete post?")
+            if (answer) {
+                console.log("Delete news" + " " + n.id);
+                this.$http.delete('/api/sticker/' + n.id).then(function(response) {
+
+                });
+            } else {
+                //some code
+            }
+
+        },
         refresh: function() {
             this.$http.get('/api/sticker').then(function(response) {
                 this.news = response.body.reverse();
-                console.log(response);
             });
         }
     }

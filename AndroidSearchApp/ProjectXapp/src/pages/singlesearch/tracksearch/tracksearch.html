@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Tracks: {{ searchterm }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Tracks
+        </ion-list-header>
+        <ion-item *ngFor="let track of selectedItem?.items" (click)="trackTapped($event, track)">
+            <ion-thumbnail item-left>
+                <img src="{{ track?.album?.images[2]?.url }}" />
+            </ion-thumbnail>
+            <h2> {{ track.name }} </h2>
+            <h3>{{ track?.album?.name }}</h3>
+            <p><span *ngFor="let artist of track?.artists">{{ artist?.name }} </span></p>
+            <ion-icon class="topdawg" item-end item-right name="more" (click)="trackoptions($event, track);$event.stopPropagation()"></ion-icon>
+        </ion-item>
+    </ion-list>
+
+    <ion-item>
+        <ion-icon name="arrow-back" isActive="{{ prevactive }}" item-left (click)="prevpage()"></ion-icon>
+        <p text-center>Page {{ pagenr }}</p>
+        <ion-icon name="arrow-forward" isActive="{{ nextactive }}" item-right (click)="nextpage() "></ion-icon>
+    </ion-item>
+</ion-content>

@@ -1,0 +1,64 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ selectedItem?.name }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <!--
+    <h2>{{ selectedItem?.name }}</h2>
+    <ion-thumbnail item-left>
+        <img src="{{ selectedItem?.images[0]?.url }}">
+    </ion-thumbnail>
+
+    <ion-list>
+        <ion-item *ngFor="let song of tracklist">
+            <a href="{{ song?.external_urls?.spotify }}">{{ song.name }}</a>
+        </ion-item>
+    </ion-list>
+    -->
+    <ion-card>
+        <img src="{{ selectedItem?.images[0]?.url }}">
+        <ion-card-content>
+            <ion-card-title>
+                {{ selectedItem?.name }}
+                <a href="{{ selectedItem?.external_urls?.spotify }}" item-end item-right>
+                    <ion-badge color="favorite" item-right item-end>Spotify</ion-badge>
+                </a>
+            </ion-card-title>
+            <hr>
+            <h2>
+                Artists:
+            </h2>
+            <p *ngFor="let artist of selectedItem?.artists" (click)="artistTapped($event, artist)">
+                {{ artist?.name }}
+            </p>
+            <hr>
+        </ion-card-content>
+        <ion-list>
+            <ion-item lines *ngFor="let track of tracklist">
+                <ion-thumbnail item-left class="item">
+                    <img src="{{ selectedItem?.images[2]?.url }}" />
+                </ion-thumbnail>
+                <h2> {{ track.name }} </h2>
+                <p> {{ toMinutes(track.duration_ms) }}</p>
+                <a href="{{ track?.external_urls?.spotify }}" item-end item-right>
+                    <ion-icon item-end item-right name='musical-notes'></ion-icon>
+                </a>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <h5>Tweets:</h5>
+    <div *ngFor="let tweet of tweets?.statuses">
+        <p>
+            {{ tweet?.text }}
+        </p>
+        <div style="text-align: right; color: #1DA1F2;">
+            <i>-{{tweet?.user.screen_name}}</i>
+        </div>
+        <hr>
+    </div>
+
+</ion-content>

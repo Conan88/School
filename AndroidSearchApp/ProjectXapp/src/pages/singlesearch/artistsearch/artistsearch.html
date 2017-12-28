@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Artists: {{ searchterm }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Artists
+        </ion-list-header>
+        <ion-item *ngFor="let artist of selectedItem?.items" (click)="artistTapped($event, artist)">
+            <ion-thumbnail item-left>
+                <img src="{{ artist?.images[2]?.url }}" />
+            </ion-thumbnail>
+            <h2> {{ artist.name }} </h2>
+            <ion-icon class="topdawg" item-end item-right name="more" (click)="artistoptions($event, artist);$event.stopPropagation()"></ion-icon>
+        </ion-item>
+    </ion-list>
+
+    <ion-item>
+        <ion-icon name="arrow-back" item-left (click)="prevpage()"></ion-icon>
+        <p text-center>Page {{ pagenr }}</p>
+        <ion-icon name="arrow-forward" item-right (click)="nextpage()"></ion-icon>
+    </ion-item>
+</ion-content>

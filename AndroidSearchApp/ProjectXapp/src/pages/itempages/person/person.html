@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ selectedItem.name.first }} {{ selectedItem.name.last }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h2>Info:</h2>
+    <ion-avatar item-left>
+        <img src="{{selectedItem.picture.thumbnail}}">
+    </ion-avatar>
+    <p>
+        Adress: {{ selectedItem.location.street }}, {{ selectedItem.location.city }}, {{ selectedItem.location.state }} {{ selectedItem.location.postcode }}
+    </p>
+</ion-content>

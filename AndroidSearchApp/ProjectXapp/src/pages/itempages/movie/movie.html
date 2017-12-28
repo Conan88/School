@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ movie?.title }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-slides pager>
+
+        <ion-slide>
+            <ion-thumbnail item-left>
+                <img src="{{movie?.poster}}">
+            </ion-thumbnail>
+        </ion-slide>
+        <ion-slide>
+            <iframe width="250" height="150" [src]="updateVideoUrl()" frameborder="0" allowfullscreen></iframe>
+        </ion-slide>
+    </ion-slides>
+
+    <a href="http://www.imdb.com/title/{{ movie?.imdbID }}" item-end item-right>
+        <ion-badge color="yellow" item-right item-end>IMDb</ion-badge>
+    </a>
+
+    <h5>RATINGS:</h5>
+    <div *ngFor="let rating of movie?.ratings">
+        <h6>{{ rating?.source }}:</h6>
+        <p>{{ rating?.value }}</p>
+    </div>
+
+    <h5>RELEASED:</h5>
+    <p>{{ movie?.released }}</p>
+
+    <h5>GENRE:</h5>
+    <p>{{ movie?.genre }}</p>
+
+    <h5>RATED:</h5>
+    <p>{{ movie?.rated }}</p>
+
+    <h5>RUNTIME:</h5>
+    <p>{{ movie?.runtime }}</p>
+
+    <h5>PLOT:</h5>
+    <p>{{ movie?.plot }}</p>
+
+    <h5>DIRECTOR:</h5>
+    <p>{{ movie?.director }}</p>
+
+    <h5>WRITERS:</h5>
+    <p>{{ movie?.writers }}</p>
+
+    <h5>ACTORS:</h5>
+    <p>{{ movie?.actors }}</p>
+
+    <h5>TWEETS:</h5>
+    <div *ngFor="let tweet of tweets?.statuses">
+        <p>
+            {{ tweet?.text }}
+        </p>
+        <div style="text-align: right; color: #1DA1F2;">
+            <i>-{{tweet?.user.screen_name}}</i>
+        </div>
+        <hr>
+    </div>
+
+</ion-content>

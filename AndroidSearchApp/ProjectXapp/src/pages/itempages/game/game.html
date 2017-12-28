@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ selectedItem?.name }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <img src="{{ selectedItem?.cover?.url }}">
+    <br>
+    <a href="{{ selectedItem?.url }}" item-end item-right>
+        <ion-badge color="yellow" item-right item-end>IGDB</ion-badge>
+    </a>
+
+    <span *ngFor="let website of selectedItem?.websites">
+            <a *ngIf="website?.category==1" href="{{ website?.url }}" item-end item-right>
+                <ion-badge color="yellow" item-right item-end>Official website</ion-badge>
+            </a>
+            <a *ngIf="website?.category==4" href="{{ website?.url }}" item-end item-right>
+                <ion-badge color="yellow" item-right item-end>Facebook</ion-badge>
+            </a>
+            <a *ngIf="website?.category==5" href="{{ website?.url }}" item-end item-right>
+                <ion-badge color="yellow" item-right item-end>Twitter</ion-badge>
+            </a>
+    </span>
+
+    <p>{{timeConverter(selectedItem?.first_release_date)}}</p>
+
+    <h6>{{ rating(selectedItem?.rating) }}</h6>
+
+    <h5>SUMMARY</h5>
+    <p>{{ selectedItem?.summary }}</p>
+
+    <h5>STORYLINE</h5>
+    <p>{{ selectedItem?.storyline }}</p>
+
+    <h5>TWEETS</h5>
+    <div *ngFor="let tweet of tweets?.statuses">
+        <p>
+            {{ tweet?.text }}
+        </p>
+        <div style="text-align: right; color: #1DA1F2;">
+            <i>-{{tweet?.user.screen_name}}</i>
+        </div>
+        <hr>
+    </div>
+
+    <h5>AGE RATING</h5>
+    <p>PEGI rating: {{ selectedItem?.pegi?.rating }}</p>
+    <p>{{ selectedItem?.pegi?.synopsis }}</p>
+
+</ion-content>

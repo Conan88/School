@@ -1,0 +1,31 @@
+<!--Denne siden kommer man til når man søker etter spill og trykker "see more" -->
+
+<ion-header>
+    <ion-navbar>
+        <ion-title>Games: {{ searchterm }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Games
+        </ion-list-header>
+        <ion-item *ngFor="let game of selectedItem" (click)="gameTapped($event, game)">
+            <ion-thumbnail item-left>
+                <img src="{{ game?.cover?.url }}" />
+            </ion-thumbnail>
+            <h2> {{ game?.name }} </h2>
+            <p>{{timeConverter(game?.first_release_date)}}</p>
+            <p> {{rating(game?.rating)}}</p>
+
+            <ion-icon class="topdawg" item-end item-right name="more" (click)="gameoptions($event, game);$event.stopPropagation()"></ion-icon>
+        </ion-item>
+    </ion-list>
+
+    <ion-item>
+        <ion-icon name="arrow-back" item-left (click)="prevpage()"></ion-icon>
+        <p text-center>Page {{ pagenr }}</p>
+        <ion-icon name="arrow-forward" item-right (click)="nextpage()"></ion-icon>
+    </ion-item>
+</ion-content>

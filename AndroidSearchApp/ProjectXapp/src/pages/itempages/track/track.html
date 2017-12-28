@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ selectedItem?.name }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h5>Tweets:</h5>
+    <div *ngFor="let tweet of tweets?.statuses">
+        <p>
+            {{ tweet?.text }}
+        </p>
+        <div style="text-align: right; color: #1DA1F2;">
+            <i>-{{tweet?.user.screen_name}}</i>
+        </div>
+        <hr>
+    </div>
+</ion-content>

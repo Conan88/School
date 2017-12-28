@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ selectedItem?.name }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-card>
+        <ng-container *ngIf="selectedItem.images != null">
+            <img src="{{ selectedItem?.images[0]?.url }}">
+        </ng-container>
+        <ion-card-content>
+            <ion-card-title>
+                {{ selectedItem?.name }}
+                <ion-item>
+                    <a href="{{ selectedItem?.external_urls?.spotify }}" item-end item-right>
+                        <ion-badge color="secondary" item-right>Spotify</ion-badge>
+                    </a>
+                </ion-item>
+            </ion-card-title>
+            <p>
+
+            </p>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-content>
+            <ion-card-title>
+                Top Tracks
+            </ion-card-title>
+        </ion-card-content>
+        <ion-list>
+            <ion-item lines *ngFor="let track of toptracks">
+                <ion-thumbnail item-left class="item">
+                    <img src="{{ track?.album?.images[2]?.url }}" />
+                </ion-thumbnail>
+                <h2> {{ track.name }} </h2>
+                <a href="{{ track?.external_urls?.spotify }}" item-end item-right>
+                    <ion-icon item-end item-right name='musical-notes'></ion-icon>
+                </a>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-content>
+            <ion-card-title>
+                Albums
+            </ion-card-title>
+        </ion-card-content>
+        <ion-list>
+            <ion-item lines *ngFor="let album of albums?.items" (click)="albumTapped($event, album)">
+                <ion-thumbnail item-left class="item">
+                    <img src="{{ album?.images[1]?.url }}" />
+                </ion-thumbnail>
+                <h2> {{ album.name }} </h2>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+
+    <!-- 
+        <ng-container *ngFor="let album of albums?.items">
+            <img src="{{ album?.images[1]?.url }}" style="width:30%" (click)="albumTapped($event, album)">
+        </ng-container>
+    -->
+
+    <h5>Tweets:</h5>
+    <div *ngFor="let tweet of tweets?.statuses">
+        <p>
+            {{ tweet?.text }}
+        </p>
+        <div style="text-align: right; color: #1DA1F2;">
+            <i>-{{tweet?.user.screen_name}}</i>
+        </div>
+        <hr>
+    </div>
+
+</ion-content>

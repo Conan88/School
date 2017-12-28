@@ -1,0 +1,161 @@
+<ion-header>
+    <ion-navbar>
+
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{ searchingText }}</ion-title>
+
+    </ion-navbar>
+    <ion-searchbar showCancelButton=true (ionInput)="getItems($event)">
+    </ion-searchbar>
+</ion-header>
+
+
+
+
+<ion-content padding>
+    <h2></h2>
+
+    <ion-list>
+        <ion-badge item-right (click)="togglefilter()">Filter</ion-badge>
+
+        <div *ngIf="filterop == true">
+            <ion-item>
+                <ion-label>Movies</ion-label>
+                <ion-checkbox checked= {{searchmovies}} (click)="moviefilter()"></ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Artists</ion-label>
+                <ion-checkbox color="dark" checked= {{searchartists}} (click)="artistfilter()"></ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Albums</ion-label>
+                <ion-checkbox value="cherry" checked= {{searchalbums}} (click)="albumfilter()"></ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Tracks</ion-label>
+                <ion-checkbox color="secondary" checked= {{searchtracks}} (click)="trackfilter()"></ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Games</ion-label>
+                <ion-checkbox color="dark" checked= {{searchgames}} (click)="gamefilter()"></ion-checkbox>
+            </ion-item>
+        </div>
+
+    </ion-list>
+
+    <br>
+
+    <ion-list>
+        <div *ngIf="searchmovies == true">
+            <ion-list-header>
+                Movies and Tv
+                <button ion-button clear item-end item-right (click)="seeMoreMovies($event, everything?.movieslist)">See More</button>
+            </ion-list-header>
+            <ion-item *ngFor="let movie of everything?.movieslist| slice:0:3" (click)="movieTapped($event, movie)">
+                <ion-thumbnail item-left>
+                    <img src="{{ movie?.poster }}" />
+                </ion-thumbnail>
+                <h2> {{ movie.title }} </h2>
+                <h3 text-capitalize> {{ movie.type }} • {{ movie.year }}</h3>
+                <ion-icon class="topdawg" item-end item-right name="more" (click)="movieoptions($event, movie);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </div>
+
+        <div *ngIf="searchartists == true">
+            <ion-list-header>
+                Artists
+                <button ion-button clear item-end item-right (click)="seeMoreArtists($event, everything?.artistholder?.artists)">{{ everything?.artistholder?.artists?.total }} More</button>
+            </ion-list-header>
+            <ion-item *ngFor="let artist of everything?.artistholder?.artists?.items| slice:0:3" (click)="artistTapped($event, artist)">
+                <ion-thumbnail item-left>
+                    <img src="{{ artist?.images[2]?.url }}" />
+                </ion-thumbnail>
+                <h2> {{ artist.name }} </h2>
+                <ion-icon class="topdawg" item-end item-right name="more" (click)="artistoptions($event, artist);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </div>
+
+        <div *ngIf="searchalbums == true">
+            <ion-list-header>
+                Albums
+                <button ion-button clear item-end item-right (click)="seeMoreAlbums($event, everything?.artistholder?.albums)">{{ everything?.artistholder?.albums?.total }} More</button>
+            </ion-list-header>
+            <ion-item *ngFor="let album of everything?.artistholder?.albums?.items| slice:0:3 " (click)="albumTapped($event, album)">
+                <ion-thumbnail item-left>
+                    <img src="{{ album?.images[2]?.url }}" />
+                </ion-thumbnail>
+                <h2>{{ album.name }}</h2>
+                <h3><span *ngFor="let artist of album?.artists">{{ artist?.name }} </span></h3>
+                <ion-icon class="topdawg" item-end item-right name="more" (click)="albumoptions($event, album);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </div>
+
+        <div *ngIf="searchtracks == true">
+            <ion-list-header>
+                Tracks
+                <button ion-button clear item-end item-right (click)="seeMoreTracks($event, everything?.artistholder?.tracks)">{{ everything?.artistholder?.tracks?.total }} More</button>
+            </ion-list-header>
+            <ion-item *ngFor="let track of everything?.artistholder?.tracks?.items| slice:0:3 " (click)="trackTapped($event, track)">
+                <ion-thumbnail item-left>
+                    <img src="{{ track?.album?.images[2]?.url }}" />
+                </ion-thumbnail>
+                <h2> {{ track.name }} </h2>
+                <h3>{{ track?.album?.name }}</h3>
+                <p><span *ngFor="let artist of track?.artists">{{ artist?.name }} </span></p>
+                <ion-icon class="topdawg" item-end item-right name="more" (click)="trackoptions($event, track);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </div>
+
+        <div *ngIf="searchgames == true">
+            <ion-list-header>
+                Games
+                <button ion-button clear item-end item-right (click)="seeMoreGames($event, everything?.gamelist)">See More</button>
+            </ion-list-header>
+            <ion-item *ngFor="let game of everything?.gamelist| slice:0:3 " (click)="gameTapped($event, game)">
+                <ion-thumbnail item-left>
+                    <img src="{{ game?.cover?.url }}" />
+                </ion-thumbnail>
+                <h2> {{ game?.name }} </h2>
+                <p>{{timeConverter(game?.first_release_date)}}</p>
+                <p>{{rating(game?.rating)}}</p>
+                <ion-icon class="topdawg" item-end item-right name="more" (click)="gameoptions($event, game);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </div>
+
+    </ion-list>
+
+    <!--
+    <ion-card>
+        <ion-card-header> Movies and Tv
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item *ngFor="let movie of justmovies ">
+                    <ion-thumbnail item-left>
+                        <img src="{{ movie.poster }} " />
+                    </ion-thumbnail>
+                    <h2> {{ movie.title }} </h2>
+                    <p> {{ movie.type }} • {{ movie.year }}</p>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    -->
+
+    <!--
+    <ion-card *ngFor="let movie of justmovies ">
+        <img src="{{ movie.poster }} " />
+        <ion-card-header> {{ movie.title }}
+        </ion-card-header>
+        <ion-card-content>
+            Contents
+        </ion-card-content>
+    </ion-card>
+-->
+</ion-content>

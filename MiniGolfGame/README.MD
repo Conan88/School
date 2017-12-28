@@ -1,7 +1,6 @@
 # This game was made for a school project. # 
 
 ## Project members: ##
-* Bullet list
     * Christoffer Berglund
     * Ruben Engelsvoll
     * Erik Fikstvedt
